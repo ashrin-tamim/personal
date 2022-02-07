@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="start_quiz_button_container">
+        <h3>NEED HELP FINDING THR PERFECT GIFT?</h3>
+        <button id="quiz_button">YES PLEASE</button>
+    </div>
+
+    <div id="main_container">
+        <div id="progress_bar">
+            <div id="stepProgressBar">
+                <div class="step">
+                </div>
+                <div class="step">
+                </div>
+                <div class="step">
+                </div>
+            </div>
+        </div>
+        <div id="quiz_container">
+            <div class="tab">
+                <div id="tab_1">
+                    <p>WHO ARE YOU SHOPPING FOR TODAY?</p>
+
+                    <input type="radio" id="radioApple" name="radioFruit" value="apple">
+                    <label for="radioApple">HIM</label>
+
+                    <input type="radio" id="radioBanana" name="radioFruit" value="banana">
+                    <label for="radioBanana">HER</label>
+
+                    <input type="radio" id="radioOrange" name="radioFruit" value="orange">
+                </div>
+            </div>
+            <div class="tab">
+                <div id="tab_2">
+                    <p>WHICH BEST DESCRIBES THEM?</p>
+
+                    <div id="tab_2_main">
+                        <input type="radio" id="radioMango" name="radioFruit" value="mango">
+                        <label for="radioMango">THE QUIRKY HOST
+                            <p>Ethical, Sustainable, Thoughtful</p>
+                        </label>
+
+                        <input type="radio" id="radioGuava" name="radioFruit" value="guava">
+                        <label for="radioGuava">THE ART COLLECTOR
+                            <p>Graphic, Arty, Colorful</p>
+                        </label>
+
+                        <input type="radio" id="radioGrapes" name="radioFruit" value="grapes">
+                        <label for="radioGrapes">THE CONSCIOUS SHOPPER
+                            <p>Ethical, Sustainable, Thoughtful</p>
+                        </label>
+
+                        <input type="radio" id="radioPineapple" name="radioFruit" value="pineapple">
+                        <label for="radioPineapple">THE INTERIORS LOVER
+                            <p>Aesthetic, Comfortable, Home</p>
+                        </label>
+
+                        <input type="radio" id="radioKiwi" name="radioFruit" value="kiwi">
+                        <label for="radioKiwi">THE QUIRKY HOST
+                            <p>Fun, Novelty, Cooking</p>
+                        </label>
+
+                        <input type="radio" id="radioWatermelon" name="radioFruit" value="watermelon">
+                        <label for="radioWatermelon">THE ART COLLECTOR
+                            <p>Graphic, Arty, Colorful</p>
+                        </label>
+
+                        <input type="radio" id="radioBerries" name="radioFruit" value="berry">
+                        <label for="radioBerries">THE CONSCIOUS SHOPPER
+                            <p>Ethical, Sustainable, Thoughtful</p>
+                        </label>
+
+                        <input type="radio" id="radioJackfruit" name="radioFruit" value="jackfruit">
+                        <label for="radioJackfruit">THE INTERIORS LOVER
+                            <p>Aesthetic, Comfortable, Home</p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="tab">
+                <div id="tab_3">
+                    <p>WHAT IS YOUR BUDGET?</p>
+
+                    <div id="tab_3_main">
+                        <div class="POC" data-placeholder="£">
+                            <input type="number" class="POC__input-field" id="fname" name="max" placeholder="max">
+                        </div>
+                        <div class="POC" data-placeholder="£">
+                            <input type="number" class="POC__input-field" id="lname" name="min" placeholder="min">
+                        </div>
+                        <button type="button">SHOW ME EVERYTHING</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="next_button_container">
+            <button type="button" id="nextBtn">NEXT</button>
+        </div>
+        <div id="skip_exit_button_container">
+            <a id="exit_quiz" href="#">Exit Quiz</a>
+            <a id="skip" href="#">Skip</a>
+        </div>
+    </div>
+</body>
+
+</html>

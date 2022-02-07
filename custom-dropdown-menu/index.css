@@ -1,0 +1,148 @@
+/* 
+.changing_scrollbar_position {
+	display: none;
+	border: 1px solid;
+	border-top: 1px solid transparent;
+    width: 280px;
+    height: 210px;
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+}
+.show_hide {
+	display: block;
+}
+
+.dropdown-menu.show{
+	display: flex;
+	flex-direction: column;
+    max-height: 200px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: -40px;
+    width: 270px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-radius: 0px;
+    z-index: 1;
+    top: 7px !important;
+}
+
+.dropdown-menu li a{
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 263px;
+    height: 60px;
+}
+
+.dropdown-menu li a img{
+    width: 50px !important;
+    border: 1px solid transparent !important;
+    object-fit: cover;
+    object-position: 0px -20px;
+    margin-left: -3px;
+    
+}
+
+.dropdown-menu li a p{
+    justify-self: start;
+    flex-basis: 75%;
+    align-self: center;
+    margin-top: 14px;
+    margin-left: 10px;
+}
+
+.dropdown button {
+	border: 1px solid black;
+    border-radius: 0;
+    background-color: white;
+} 
+
+.dropdown button:active,
+.dropdown button:focus,
+.dropdown button:focus:active {
+  background-image: none;
+  outline: 0;
+  box-shadow: none;
+}
+#menu1 {
+    width: 280px; 
+    text-align: left;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.dropdown-menu::-webkit-scrollbar {
+    width: 5px;
+    background: white;
+}
+ 
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background: navy; 
+} */
+
+
+
+.dropdown-menu {
+    height: 95%;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 5px;
+    border: 0px;
+    box-shadow: 0 0 0;
+}
+
+.caret {
+	float: right;
+    margin-top: 5%;
+}
+
+#menu1 {
+    width: 165px; 
+    text-align: left;
+}
+
+.changing_scrollbar_position {
+	display: none;
+	border: 1px solid;
+    border-top: 1px solid transparent;
+    width: 165px;
+    height: 200px;
+    background-color: white;
+    z-index: 1;
+}
+
+.show_hide {
+	display: block;
+    position: unset;
+}
+
+.dropdown button {
+	border: 1px solid black;
+    border-radius: 0;
+    background-color: white;
+} 
+
+.dropdown button:active,
+.dropdown button:focus,
+.dropdown button:focus:active {
+  background-image: none;
+  outline: 0;
+  box-shadow: none;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.dropdown-menu::-webkit-scrollbar {
+    width: 5px;
+    background: white;
+}
+ 
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background: navy; 
+} 
