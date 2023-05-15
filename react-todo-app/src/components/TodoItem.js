@@ -1,21 +1,29 @@
 /* eslint-disable react/prop-types */
-// import { format } from 'date-fns';
+import { format } from 'date-fns';
 import React from 'react';
-// import { MdDelete, MdEdit } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
 import styles from '../styles/modules/todoItem.module.scss';
-// import { getClasses } from '../utils/getClasses';
+import { getClasses } from '../utils/getClasses';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { dataBase } from '../Firebase';
 // import TodoModal from './TodoModal';
 
 function TodoItem({ todo }) {
+  const handleDelete = async (id) => {
+    console.log('dleted...');
+    await deleteDoc(doc(dataBase, 'todos', id));
+  };
+  const handleEdit = () => {
+    console.log('Edited...');
+  };
   return (
-    <>
+    <div className={styles.item}>
       <div className={styles.todoDetails}>
-        {todo.text}
-        {/* <div className={styles.texts}>
+        <div className={styles.texts}>
           <p
             className={getClasses([
               styles.todoText,
-              todo.status === 'complete' && styles['todoText--completed']
+              todo.status == 'complete' && styles['todoText--completed']
             ])}>
             {todo.title}
           </p>
@@ -23,15 +31,14 @@ function TodoItem({ todo }) {
         </div>
       </div>
       <div className={styles.todoActions}>
-        <div className={styles.icon} role="button">
+        <div className={styles.icon} role="button" onClick={() => handleDelete(todo.id)}>
           <MdDelete />
         </div>
-        <div className={styles.icon} role="button">
+        <div className={styles.icon} role="button" onClick={handleEdit}>
           <MdEdit />
-        </div> */}
+        </div>
       </div>
-      {/* <TodoModal type="update" todo={todo} /> */}
-    </>
+    </div>
   );
 }
 

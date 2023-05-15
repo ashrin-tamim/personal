@@ -6,6 +6,7 @@ import TodoItem from './TodoItem';
 
 function AppContent() {
   const [todos, setTodos] = useState([]);
+
   useEffect(() => {
     const FbQuery = query(collection(dataBase, 'todos'));
     const fetchData = onSnapshot(FbQuery, (querySnapshot) => {
@@ -13,22 +14,16 @@ function AppContent() {
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id });
       });
-      setTodos(todosArr);
-      console.log(todosArr);
+      const sortedTodoList = [...todosArr];
+      sortedTodoList.sort((a, b) => new Date(b.time) - new Date(a.time));
+      setTodos(sortedTodoList);
     });
     return () => fetchData;
   }, []);
-  // const todoList = useSelector((state) => state.todoL.todoList);
-  // const sortedTodoList = [...todoList];
-  // sortedTodoList.sort((a, b) => new Date(b.time) - new Date(a.time));
+
   return (
     <div>
-      {todos.map((todo, index) => (
-        <TodoItem key={index} todo={todo} />
-      ))}
-      {/* {sortedTodoList && sortedTodoList.length > 0
-        ? sortedTodoList.map((todo) => todo.title + ' ')
-        : 'no todo found'} */}
+      {todos ? todos.map((todo, index) => <TodoItem key={index} todo={todo} />) : 'no todo found'}
     </div>
   );
 }
