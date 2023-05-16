@@ -1,25 +1,47 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/modules/modal.module.scss';
 import { MdOutlineClose } from 'react-icons/md';
 import Button, { SelectButton } from './Button';
 import toast from 'react-hot-toast';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { dataBase } from '../Firebase';
-function TodoModal({ modalOpen, setModalOpen }) {
+function TodoModal({ todo, type, modalOpen, setModalOpen }) {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('incomplete');
+  useEffect(() => {
+    if (type === 'update' && todo) {
+      setTitle(todo.title);
+      setStatus(todo.status);
+    } else {
+      setTitle('');
+      setStatus('incomplete');
+    }
+  }, [type, todo, modalOpen]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (title && status) {
-      await addDoc(collection(dataBase, 'todos'), {
-        title,
-        status,
-        time: new Date().toLocaleString()
-      });
-      toast.success('Task Added Successfully.');
+      if (type === 'add') {
+        await addDoc(collection(dataBase, 'todos'), {
+          title,
+          status,
+          time: new Date().toLocaleString()
+        });
+        toast.success('Task Added Successfully.');
+      } else {
+        if (todo.title !== title || todo.status !== status) {
+          await updateDoc(doc(dataBase, 'todos', todo.id), {
+            title,
+            status
+          });
+          toast.success('Task Edited Successfully.');
+        } else {
+          toast.error('No Changes Are Made.');
+        }
+      }
       setModalOpen(false);
     } else {
+      e.preventDefault();
       toast.error("Title sholdn't be empty.");
     }
   };
@@ -31,7 +53,7 @@ function TodoModal({ modalOpen, setModalOpen }) {
             <MdOutlineClose />
           </div>
           <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-            <h1 className={styles.formTitle}>Please add a task</h1>
+            <h1 className={styles.formTitle}>{type === 'update' ? 'Update' : 'Add'} task</h1>
             <label htmlFor="title">
               Title
               <input
@@ -49,7 +71,7 @@ function TodoModal({ modalOpen, setModalOpen }) {
             </label>
             <div className={styles.buttonContainer}>
               <Button type="submit" variant="primary">
-                Add Task
+                {type === 'update' ? 'Update' : 'Add'} Task
               </Button>
               <Button
                 type="button"

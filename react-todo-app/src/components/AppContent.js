@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import { dataBase } from '../Firebase';
 import TodoItem from './TodoItem';
+import styles from '../styles/modules/app.module.scss';
 
 function AppContent() {
   const [todos, setTodos] = useState([]);
@@ -22,7 +23,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.content__wrapper}>
       {todos ? todos.map((todo, index) => <TodoItem key={index} todo={todo} />) : 'no todo found'}
     </div>
   );
