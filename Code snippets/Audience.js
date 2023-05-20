@@ -54,7 +54,7 @@ function () {
 
 function () {
   try {
-    if(document.cookie.includes("ls_11=bucketed")) {
+    if(document.cookie.includes("test_35=bucketed")) {
       return false;
     } else {
       return true;
@@ -63,3 +63,5 @@ function () {
   catch (err) {
   }
 }
+
+document.cookie = "test_33=bucketed";

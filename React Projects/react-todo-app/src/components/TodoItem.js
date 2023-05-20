@@ -51,7 +51,11 @@ function TodoItem({ todo }) {
               ])}>
               {todo.title}
             </p>
-            <p className={styles.time}>{format(new Date(todo.time), 'p, MM/dd/yyyy')}</p>
+            <p className={styles.time}>
+              {format(new Date(todo.day), 'MMMM do')}, {format(new Date(todo.time), 'p')}
+              {/* {todo.day !== 'MM/DD/YYYY' ? format(new Date(todo.day), 'MMMM do') : 'ss'},
+              {todo.time !== 'hh:mm aa' ? format(new Date(todo.time), 'p') : ''} */}
+            </p>
           </div>
         </div>
         <div className={styles.todoActions}>
