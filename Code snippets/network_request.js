@@ -34,3 +34,4 @@ $.ajax({
 });
 
 fetch(location.pathname + '.js').then(res => res.json()).then(json => console.log(json))
+
