@@ -32,6 +32,18 @@ $.ajax({
     console.log(element);
   }
 });
+fetch(`${url}`)
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(html) {
+      removeSearchResults();
+      var parser = new DOMParser();
+      var replacedData = parser.parseFromString(html, "text/html");
+      let titles = replacedData.querySelectorAll(".result-title > span");
+     
+    })
+    .catch(function(err) {});
 
 fetch(location.pathname + '.js').then(res => res.json()).then(json => console.log(json))
 

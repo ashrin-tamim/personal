@@ -72,9 +72,9 @@ waitForElem(
 					console.log("window.ga", window.ga);
 					ga("send", {
 						hitType: "event",
-						eventCategory: "Click Goal",
-						eventAction: "Click Action",
-						eventLabel: `User clicked on the tile: ${title}`,
+						eventCategory: "ab-test-otd",
+						eventAction: "click",
+						eventLabel: `dsa-advisor-detail`,
 					});
 				}
 			});
