@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 // import ReactDOM from 'https://esm.sh/react-dom@18.2.0';
 // import { useState } from "react";
-
 import "./App.css";
 
 const quotes = [
