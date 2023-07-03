@@ -47,44 +47,47 @@ const TimerLength = ({
 };
 
 const Timer = ({ handleRestartClick, sessionTimeLength, breakTimeLength }) => {
-	const [timeRemaining, setTimeRemaining] = useState(sessionTimeLength * 60); // 25 minutes in seconds
+	const [timeRemaining, setTimeRemaining] = useState(25 * 60); // 25 minutes in seconds
 	const [timerActive, setTimerActive] = useState(false);
 	const [isBreak, setIsBreak] = useState(false);
 	const [title, setTitle] = useState("Session");
-
-	useEffect(() => {
-		setTimeRemaining(sessionTimeLength * 60);
-	}, [sessionTimeLength]);
-
-	useEffect(() => {
-		let timer = null;
-
-		if (timerActive && timeRemaining > 0) {
-			timer = setInterval(() => {
-				setTimeRemaining((prevTime) => prevTime - 1);
-			}, 1000);
-		} else if (timeRemaining === 0) {
-			handleTimerComplete();
-		}
-
-		return () => clearInterval(timer);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [timerActive, timeRemaining]);
 
 	useEffect(() => {
 		if (isBreak) {
 			setTimeRemaining(breakTimeLength * 60);
 			setTimerActive(true);
 			setTitle("Break");
+		} else {
+			setTimeRemaining(sessionTimeLength * 60);
+			setTitle("Session");
 		}
-	}, [isBreak, breakTimeLength]);
+	}, [isBreak, breakTimeLength, sessionTimeLength]);
+
+	useEffect(() => {
+		let timer = null;
+
+		if (timerActive && timeRemaining >= 0) {
+			timer = setInterval(() => {
+				setTimeRemaining((prevTime) => prevTime - 1);
+			}, 1000);
+		} else if (timerActive && timeRemaining < 0) {
+			if (1) {
+				handleTimerComplete();
+			}
+		}
+
+		return () => clearInterval(timer);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [timerActive, timeRemaining]);
 
 	const handleTimerComplete = () => {
 		if (!isBreak) {
 			setIsBreak(true);
 		} else {
+			console.log("timer should stop now");
 			setIsBreak(false);
-			setTimerActive(false);
+			setTimerActive(true);
+			playBeepSound();
 		}
 	};
 
@@ -92,15 +95,17 @@ const Timer = ({ handleRestartClick, sessionTimeLength, breakTimeLength }) => {
 		const minutes = Math.floor(time / 60);
 		const seconds = time % 60;
 
-		return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+		return `${minutes.toString().padStart(2, "0")}:${seconds
+			.toString()
+			.padStart(2, "0")}`;
 	};
 
 	const handleStartTimer = () => {
-		setTimerActive(true);
-	};
-
-	const handlePauseTimer = () => {
-		setTimerActive(false);
+		if (timerActive) {
+			setTimerActive(false);
+		} else {
+			setTimerActive(true);
+		}
 	};
 
 	const handleRestartTimer = () => {
@@ -111,25 +116,33 @@ const Timer = ({ handleRestartClick, sessionTimeLength, breakTimeLength }) => {
 		handleRestartClick();
 	};
 
+	const playBeepSound = () => {
+		const beepSound = document.getElementById("beep");
+		if (beepSound) {
+			beepSound.play();
+		}
+	};
+
 	return (
 		<div className="timer-main-container">
 			<div id="timer-label">{title}</div>
 			<div id="time-left">{formatTime(timeRemaining)}</div>
-			{!timerActive && (
-				<button id="start_stop" className="button" onClick={handleStartTimer}>
+			{
+				<button className="button" id="start_stop" onClick={handleStartTimer}>
 					Start Timer
 				</button>
-			)}
-			{timerActive && (
+			}
+			{/* {timerActive && (
 				<button className="button" onClick={handlePauseTimer}>
 					Pause Timer
 				</button>
-			)}
+			)} */}
 			{
 				<button id="reset" className="button" onClick={handleRestartTimer}>
 					Restart Timer
 				</button>
 			}
+			<audio id="beep" src="path/to/beep-sound.mp3" />
 		</div>
 	);
 };
